@@ -5,7 +5,12 @@ This repository has the function of presenting codes for downloading and manipul
 The AERONET is an international federation of ground based sun and sky scanning radiometer and give the aerosol optical depth data from the instruments. This code will download the data, select the optical thicknesses and finally plot for the period you chose. It is recommended that you go to the website to find out the names of the AERONET stations you want to work with.
   
 - MODIS (Time Averaged Map of Aerosol Optical Depth 550 nm) - Sattelite (https://giovanni.gsfc.nasa.gov/giovanni/)
-MODIS data are available in daily/monthly formats from both Terra (MOD*) and Aqua (MYD*) platforms. Go to the Giovanni website and enter the term MYD08_D3 in the search area. Be sure to login first; the same credentials from EarthData can be used. Let the plot be ‘Time Average Map’. After the search, select the desired variable, here I use “Aerosol Optical Depth 550 nm (Deep Blue, Land-only) (MYD08_D3 v6.1)”. 
+MODIS data are available in daily/monthly formats from both Terra (MOD*) and Aqua (MYD*) platforms. Go to the Giovanni website and enter the term MYD08_D3 in the search area. Be sure to login first; the same credentials from EarthData can be used. Let the plot be ‘Time Average Map’. After the search, select the desired variable, here I use “Aerosol Optical Depth 550 nm (Deep Blue, Land-only) (MYD08_D3 v6.1)”. Then click ‘plot data’. In the upper left corner, click ‘lineage’, and go to the heading ‘Data File Staging’. Then click “Download list of all URLs in step” which will download the link of all input files (*.nc) in a text file. Rename the text file to modis_data_list.txt and copy this file to your unix/linux workspace. Change the permission of this file by:
+  ```shell
+  chmod 777 modis_data_list.txt
+  wget –content-disposition -i modis_data_list.txt
+  ```
+  This code, unlike other scripts, will not perform the download, it will only perform data manipulation.
   
 - IASI/Metop-B (Total Column Carbon Monoxide) - Sattelite (https://iasi.aeris-data.fr/CO/)
 IASI is a joint mission of EUMETSAT and the Centre National d’Etudes Spatiales (CNES, France). The authors acknowledge the AERIS data infrastructure for providing access to the IASI data in this study, ULB-LATMOS for the development of the retrieval algorithms, and Eumetsat/AC SAF for CO/O3 data production. In the case of IASI data, we have two codes, one for downloading the data and one for plotting the data. It was separated due to the fact that the data size is large, making a single code duly slow. 
